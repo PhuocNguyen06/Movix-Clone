@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import "./herobanner.scss";
- 
+
 import useFetch from "../../../hooks/useFetch";
 
 import Img from "../../../components/lazyLoadImage/Img";
@@ -11,23 +11,23 @@ import ContentWrapper from "../../../components/contentWrapper/ContentWrapper";
 const HeroBanner = () => {
     const [background, setBackground] = useState("");
     const [query, setQuery] = useState("");
+    const [show, setShow] = useState(false);
     const navigate = useNavigate();
     const { url } = useSelector((state) => state.home);
     const { data, loading } = useFetch("/movie/upcoming");
 
-      useEffect(() => {
-          if(data && data.results){
+    useEffect(() => {
+        if (data && data.results) {
             const bg = url.backdrop + data.results[Math.floor(Math.random() * 20)]?.backdrop_path;
             setBackground(bg);
-          }
-      }, [data])
+        }
+    }, [data])
 
     const searchQueryHandler = (event) => {
         if (event.key === "Enter" && query.length > 0) {
             navigate(`/search/${query}`);
         }
     };
-
     return (
         <div className="heroBanner">
             {!loading && (
@@ -47,8 +47,15 @@ const HeroBanner = () => {
                     <div className="searchInput">
                         <input
                             type="text"
+                            onFocus={() => setShow(true)}
+                            onBlur={() =>
+                                setTimeout(() => {
+                                    setShow(false);
+                                }, 150)
+                            }
                             placeholder="Search for a movie or tv show...."
-                            onChange={(e) => setQuery(e.target.value)}
+                            onChange={(e) => setQuery(e.currentTarget.value)}
+                            value={query}
                             onKeyUp={searchQueryHandler}
                         />
                         <button>Search</button>
