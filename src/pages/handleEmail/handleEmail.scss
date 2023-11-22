@@ -1,0 +1,70 @@
+
+$primary-color: #f6121d;
+$secondary-color: #fff;
+$background-color: #173d77;
+
+.hero-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: $background-color;
+  min-height: 100vh;
+  font-family: Netflix Sans, Helvetica Neue, Segoe UI, Roboto, Ubuntu, sans-serif;
+
+  .hero{
+    padding: 20px 32px 60px;
+    margin: 0 223.5px 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    img {
+        width: 300px;
+        background-position: 50% 50%;
+        margin: 100px 0px 20px;
+        text-align: center;
+        margin-bottom: 40px;
+      }
+    
+      .hero-section {
+        font-size: 1.5em;
+        color: $secondary-color;
+        line-height: 19px;
+      }
+    
+      .hero-title {
+        font-size: 2em;
+        margin-top: 10px;
+        color: $secondary-color;
+        display: inline-block;
+        margin: 0px 0px 12.8px;
+        margin-top: 15px;
+      }
+    
+      .hero-content {
+        font-size: 1.2em;
+        margin-top: 10px;
+        color: $secondary-color;
+        margin-top: 15px;
+      }
+    
+      button {
+        width: 200px;
+        height: 40px;
+        text-decoration: none;
+        background-color: $primary-color;
+        color:$secondary-color;
+        font-size: 1.2em;
+        margin-top: 40px;
+        letter-spacing: 0.4px;
+        border-radius: 6px;
+        padding: 10px 20px ;
+        box-shadow: #000000 0px 1px 1px 0px;
+        cursor: pointer;
+        transition: text-decoration 0.3s ease;
+      }
+  }
+}

@@ -18,28 +18,28 @@ const Header = () => {
   const location = useLocation();
 
   useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [location])
+    window.scrollTo(0, 0);
+  }, [location]);
 
   const controlNavbar = () => {
     if (window.scrollY > 200) {
       if (window.scrollY > lastScrollY && !mobileMenu) {
-        setShow("hide")
+        setShow("hide");
       } else {
         setShow("show");
       }
     } else {
-      setShow("top")
+      setShow("top");
     }
     setLastScrollY(window.scrollY);
-  }
+  };
 
   useEffect(() => {
-    window.addEventListener('scroll', controlNavbar)
+    window.addEventListener("scroll", controlNavbar);
     return () => {
-      window.removeEventListener('scroll', controlNavbar)
-    }
-  }, [lastScrollY])
+      window.removeEventListener("scroll", controlNavbar);
+    };
+  }, [lastScrollY]);
 
   const searchQueryHandler = (event) => {
     if (event.key === "Enter" && query.length > 0) {
@@ -48,6 +48,18 @@ const Header = () => {
         setShowSearch(false);
       }, 1000);
     }
+  };
+
+  const navigateToLogin = () => {
+    navigate("/login");
+    setMobileMenu(false);
+    setShowSearch(false);
+  };
+
+  const navigateToSignUp = () => {
+    navigate("/signup");
+    setMobileMenu(false);
+    setShowSearch(false);
   };
 
   const openSearch = () => {
@@ -69,6 +81,16 @@ const Header = () => {
     setMobileMenu(false);
   };
 
+  const handleSubmit = (event) => {
+    if (event.type === "click" || event.key === "Enter") {
+      if (event.target.textContent === "Login") {
+        navigateToLogin();
+      } else {
+        navigateToSignUp();
+      }
+    }
+  };
+
   return (
     <header className={`header ${mobileMenu ? "mobileView" : ""} ${show}`}>
       <ContentWrapper>
@@ -84,6 +106,12 @@ const Header = () => {
           </li>
           <li className="menuItem">
             <HiOutlineSearch onClick={openSearch} />
+          </li>
+          <li className="menuItem" onClick={handleSubmit}>
+            Login
+          </li>
+          <li className="menuItem" onClick={handleSubmit}>
+            SignUp
           </li>
         </ul>
 
@@ -116,5 +144,4 @@ const Header = () => {
   );
 };
 
-
-export default Header
+export default Header;

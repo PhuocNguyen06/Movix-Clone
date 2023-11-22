@@ -34,7 +34,7 @@ const SearchResult = () => {
             results: [...data.results, ...res.results],
           });
         } else {
-          setData(res); //null results
+          setData(res);
         }
         setPageNum((prev) => prev + 1);
       }
@@ -82,3 +82,5 @@ const SearchResult = () => {
 };
 
 export default SearchResult;
+
+
