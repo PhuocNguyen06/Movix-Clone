@@ -13,8 +13,9 @@ import SearchResult from "./pages/searchResult/SearchResult";
 import Explore from "./pages/explore/Explore";
 import PageNotFound from "./pages/404/PageNotFound";
 import HandleEmail from "./pages/handleEmail/HandleEmail";
-import Signup from "./pages/Singup/SignUp";
+import SignUp from "./pages/SingUp/SignUp";
 import LogIn from "./pages/logIn/LogIn";
+import DefaultPage from "./pages/default/DefaultPage";
 
 function App() {
     const dispatch = useDispatch();
@@ -59,8 +60,9 @@ function App() {
         <BrowserRouter>
             <Header />
             <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/signup" element={<Signup />} />
+                <Route path="/" element={<DefaultPage />} />
+                <Route path="/home" element={<Home />} />
+                <Route path="/signup" element={<SignUp />} />
                 <Route path="/login" element={<LogIn />} />
                 <Route path="/:mediaType/:id" element={<Details />} />
                 <Route path="/search/:query" element={<SearchResult />} />
