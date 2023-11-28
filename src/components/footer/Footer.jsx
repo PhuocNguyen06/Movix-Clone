@@ -25,9 +25,8 @@ const Footer = () => {
           break;
         case "linkedin":
           window.open("https://www.linkedin.com", "_blank");
-          break
-        // default:
           break;
+        // default:
       }
     };
 

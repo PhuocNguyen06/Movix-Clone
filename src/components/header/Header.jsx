@@ -3,7 +3,6 @@ import { HiOutlineSearch } from "react-icons/hi";
 import { SlMenu } from "react-icons/sl";
 import { VscChromeClose } from "react-icons/vsc";
 import { useNavigate, useLocation } from "react-router-dom";
-
 import ContentWrapper from "../../components/contentWrapper/ContentWrapper";
 import "./header.scss";
 import logo from "../../assets/movix-logo.svg";
@@ -41,8 +40,8 @@ const Header = () => {
     };
   }, [lastScrollY]);
 
-  const searchQueryHandler = (event) => {
-    if (event.key === "Enter" && query.length > 0) {
+  const searchQueryHandler = ({ key }) => {
+    if (key === "Enter" && query.length > 0) {
       navigate(`/search/${query}`);
       setTimeout(() => {
         setShowSearch(false);
@@ -62,6 +61,17 @@ const Header = () => {
     setShowSearch(false);
   };
 
+  const handleSubmit = (event) => {
+    const { type, target } = event;
+    if (type === "click" || event.key === "Enter") {
+      if (target.textContent === "Login") {
+        navigateToLogin();
+      } else {
+        navigateToSignUp();
+      }
+    }
+  };
+ 
   const openSearch = () => {
     setMobileMenu(false);
     setShowSearch(true);
@@ -81,38 +91,32 @@ const Header = () => {
     setMobileMenu(false);
   };
 
-  const handleSubmit = (event) => {
-    if (event.type === "click" || event.key === "Enter") {
-      if (event.target.textContent === "Login") {
-        navigateToLogin();
-      } else {
-        navigateToSignUp();
-      }
-    }
-  };
 
   return (
-    <header className={`header ${mobileMenu ? "mobileView" : ""} ${show}`}>
+     <header className={`header ${mobileMenu ? "mobileView" : ""} ${show}`}>
       <ContentWrapper>
         <div className="logo" onClick={() => navigate("/")}>
           <img src={logo} alt="" />
         </div>
+
         <ul className="menuItems">
           <li className="menuItem" onClick={() => navigateHandler("movie")}>
             Movies
           </li>
+
           <li className="menuItem" onClick={() => navigateHandler("tv")}>
             TV Shows
           </li>
           <li className="menuItem">
             <HiOutlineSearch onClick={openSearch} />
           </li>
-          <li className="menuItem" onClick={handleSubmit}>
-            Login
-          </li>
-          <li className="menuItem" onClick={handleSubmit}>
-            SignUp
-          </li>
+   
+              <li className="menuItem" onClick={handleSubmit}>
+                Login
+              </li>
+              <li className="menuItem" onClick={handleSubmit}>
+                SignUp
+              </li>
         </ul>
 
         <div className="mobileMenuItems">
@@ -145,3 +149,4 @@ const Header = () => {
 };
 
 export default Header;
+
